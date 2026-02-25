@@ -1,0 +1,31 @@
+const mongoose = require("mongoose");
+
+const interviewSchema = new mongoose.Schema(
+  {
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+
+    resumeData: Object,
+
+    questions: [String],
+
+    responses: [
+      {
+        question: String,
+        answer: String,
+        evaluation: String,
+        score: Number,
+      },
+    ],
+
+    currentQuestionIndex: {
+      type: Number,
+      default: 0,
+    },
+
+    finalScore: Number,
+    finalFeedback: String,
+  },
+  { timestamps: true }
+);
+
+module.exports = mongoose.model("Interview", interviewSchema);
